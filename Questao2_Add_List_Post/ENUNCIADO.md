@@ -18,7 +18,7 @@ A listagem de posts deve mostrar o título e a mensagem do post, conforme explic
 
 O formulário de inserção de novo post, conforme também explicado no arquivo index.ejs, deve conter um campo (input) para título e e um campo (input) para mensagem. 
 
-A requisição não deve passar as informações digitaqdas pela URL!! 
+A requisição não deve passar as informações digitadas pela URL!! 
 
 A dataPost deve ser sempre a data atual, conforme vemos no exemplo acima. Após a inserção, deve-se redirecionar para a página inicial (rota "/").
 
