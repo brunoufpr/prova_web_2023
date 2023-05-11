@@ -11,6 +11,8 @@
     <title>Busca CEP</title>
     <style>
         body {
+            background-color: lightyellow;
+            margin: 3rem;
             /*...*/
         }
         /*...*/
@@ -20,53 +22,69 @@
 <body> <!-- O conteúdo todo do body deve estar com cor de fundo amarelo clara, com margens de 3rem -->
     
     <h1> Busca CEP </h1>
+        <form class: form>
+            text align: center;
+            <input 
+            type="text">
+            class: "imput_text"
+            padding:0.7 rem;
+        </form>
 
     <!-- Crie um form com um input de texto para digitar o CEP (sem traço) -->
         <!-- O form deve estar centralizado, e o input com padding (borda interna) de 0.7rem -->
 
+         <h1 class= "cep_data" >
+            <span>class="cep_numero</span>
 
-    <!-- Crie uma tag h2 que mostra o nome da cidade. 
-        Em seguida, insira dois parágrafos (tag p), um para o bairro e outro para a rua -->
-    <!-- Tanto o h2 quantos os parágrafos devem estar centralizados-->
+         </h1>
+
+
+       <h2>Nome da Cidade</h2>
+       <h2 style="text-align: center;">Text</h2>
+       <p> Bairro </p>
+       <p> Rua </p>
+       <p style="text-align:center"> </p>
+       <p style="text-align:center"> </p>
+    
 
     <script>
-        // ESCREVA O CÓDIGO PARA RECUPERAR OS DADOS DA API
-        /**
-         * Exemplo de requisição e resposta da API:
-         * 
-         * URL: https://viacep.com.br/ws/80230130/json  (perceba onde na URL é inserido o CEP sem traço)
-         * Resposta:
-         * {
-            "cep": "80230-130",
-            "logradouro": "Rua Rockefeller",
-            "complemento": "",
-            "bairro": "Rebouças",
-            "localidade": "Curitiba",
-            "uf": "PR",
-            "ibge": "4106902",
-            "gia": "",
-            "ddd": "41",
-            "siafi": "7535"
-            }
-
-         **/
+        const form= document.querySelector('.form')
+      const NumeroCep = document.querySelector("cep_numero");
+     const input = document.querySelector('input_text')
+      
+       const FetchCep = async (Cep) =>{
+        
+        const APIResponse= await fetch('https://viacep.com.br/ws/80230130/json/${Cep.toLowerCase()}');
+         
+          if(APIResponse.status = 200) {
+        const data= await APIResponse.json();
+        return data;
+       }
+ }
 
 
-        async function fetchCEP(cep) {
-            
-           //...
-           // TODO: Fazer tratamento de erro (validação)
+       
+      const renderCEP = async (Cep) => {
 
-        }
+        const data = await fetchCEP(Cep)
+        
+        if (data) {
+        NumeroCep.innerHTML= data.numero;
 
-        form.addEventListener("submit", (event) => {
+
+        input.value = '';
+        }else{
+         NumeroCep.innerHTML='Not found : c';
+      }
+       
+       form.addEventListener("submit", (event) => {
             event.preventDefault()
-            //...
-        })
+            renderCEP(input.value.toLowerCase());
+            
+        });
 
     </script>
 
 </body>
-
 
 </html>
